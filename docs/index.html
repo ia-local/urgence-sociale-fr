@@ -7,12 +7,11 @@
     <title>Le Prix de la Survie | Fracture d'État</title>
     
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
 
-    <audio id="bg-audio" loop>
-        <source src="./assets/audio/theme-urgence.mp3" type="audio/mpeg">
-    </audio>
+<audio id="bg-audio"></audio>
     
     <button id="audio-toggle" class="c-audio-btn" aria-label="Activer le son">🔇 Activer l'expérience sonore</button>
 
@@ -31,11 +30,10 @@
                         <video class="c-slider__video" autoplay loop muted playsinline>
                             <source src="./assets/videos/rafale.mp4" type="video/mp4">
                         </video>
-                        <div class="c-slider__content">
-                            <span class="c-slider__tag">La Démesure</span>
-                            <h2 id="sec1-heading" class="c-slider__title">UN BOMBARDIER RAFALE :<br>70 MILLIONS D'EUROS.</h2>
-                            <p class="c-slider__text">Achetés par dizaines avec l'argent de nos impôts au nom de la "croissance" et du "réarmement".</p>
-                        </div>
+                <div class="c-slider__controls">
+                    <button class="c-btn btn-prev" aria-label="Slide précédente">❮</button>
+                    <button class="c-btn btn-next" aria-label="Slide suivante">❯</button>
+                </div>
                     </article>
 
                     <article class="c-slider__slide" role="group" aria-roledescription="slide" aria-hidden="true">
@@ -50,15 +48,29 @@
                     </article>
 
                 </div>
-                <div class="c-slider__controls">
-                    <button class="c-btn btn-prev" aria-label="Slide précédente">◀ Précédent</button>
-                    <button class="c-btn btn-next" aria-label="Slide suivante">Suivant ▶</button>
-                </div>
             </div>
         </section>
-        
+        <button id="btn-open-chat" class="c-btn-chat" aria-haspopup="dialog" aria-controls="chat-modal">
+         💬 IA Solidarité
+        </button>
         </main>
-
+<div id="chat-modal" class="c-modal c-modal--hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="c-modal__backdrop" id="modal-backdrop"></div>
+    <div class="c-modal__content">
+        <header class="c-modal__header">
+            <h2 id="modal-title">Générosité Programmée (Local)</h2>
+            <button id="btn-close-chat" class="c-modal__close" aria-label="Fermer la boîte de dialogue">✕</button>
+        </header>
+        <div class="c-modal__body" id="chat-history">
+            <p class="chat-msg chat-msg--sys">Connecté au réseau. Comment pouvons-nous hacker la précarité aujourd'hui ?</p>
+        </div>
+        <footer class="c-modal__footer">
+            <input type="text" id="chat-input" placeholder="Générer une punchline ou une solution..." aria-label="Message au chatbot">
+            <button id="btn-send-chat">Envoyer</button>
+        </footer>
+    </div>
+</div>
+    <script src="chatbot.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

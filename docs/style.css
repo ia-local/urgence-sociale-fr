@@ -55,9 +55,43 @@ html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
 .c-slider__text { font-size: clamp(1.2rem, 2vw, 1.8rem); line-height: 1.5; color: #e5e7eb; max-width: 800px; }
 
 /* Contrôles ARIA */
-.c-slider__controls { position: absolute; bottom: 5vh; left: 0; width: 100%; display: flex; justify-content: space-between; padding: 0 4rem; z-index: 20; }
+/* === Contrôles ARIA - Centrage Vertical === */
+.c-slider__controls { 
+    position: absolute; 
+    top: 50%; 
+    left: 0; 
+    width: 100%; 
+    transform: translateY(-50%); /* Centre parfaitement sur l'axe Y */
+    display: flex; 
+    justify-content: space-between; 
+    padding: 0 2rem; 
+    z-index: 20; 
+    pointer-events: none; /* Permet de cliquer à travers la div conteneur si besoin */
+}
+
+/* === Design des Flèches (Boutons circulaires) === */
 .c-btn {
-    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #fff;
-    padding: 1rem 2rem; cursor: pointer; backdrop-filter: blur(5px); font-size: 1.2rem; transition: 0.3s;
+    pointer-events: auto; /* Réactive le clic sur les boutons eux-mêmes */
+    background: rgba(0, 0, 0, 0.4); 
+    border: 2px solid rgba(255, 255, 255, 0.2); 
+    color: #fff;
+    width: 60px; /* Largeur fixe pour un cercle parfait */
+    height: 60px; /* Hauteur fixe */
+    border-radius: 50%; /* Transforme le carré en cercle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; 
+    backdrop-filter: blur(5px); 
+    font-size: 1.5rem; 
+    transition: all 0.3s ease;
+}
+
+.c-btn:hover, .c-btn:focus { 
+    background: var(--accent-red); 
+    border-color: var(--accent-red); 
+    outline: none; 
+    transform: scale(1.1); /* Léger effet de zoom au survol */
+    box-shadow: 0 0 15px rgba(225, 29, 72, 0.6); /* Halo rouge */
 }
 .c-btn:hover, .c-btn:focus { background: var(--accent-red); outline: none; }
