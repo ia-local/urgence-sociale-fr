@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comparatif des dépenses de l'État français face à la réalité de la précarité citoyenne.">
+    <title>Le Prix de la Survie | Fracture d'État</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="bg-audio" loop>
+        <source src="./assets/audio/theme-urgence.mp3" type="audio/mpeg">
+    </audio>
+    
+    <button id="audio-toggle" class="c-audio-btn" aria-label="Activer le son">🔇 Activer l'expérience sonore</button>
+
+    <header class="l-header snap-section" id="manifesto">
+        <h1>L'État <span>Hors Sol</span></h1>
+        <p>Depuis 2017, les budgets de l'État explosent pour l'armement et la macro-économie. Pendant ce temps, l'inflation écrase les travailleurs et la précarité devient la norme. <br><strong>Voici le coût de leurs décisions, face au prix de notre survie.</strong></p>
+        <div class="scroll-indicator">↓</div>
+    </header>
+
+    <main>
+        <section class="snap-section" aria-labelledby="sec1-heading">
+            <div class="c-slider" role="region" aria-roledescription="carousel" aria-label="Comparatif Défense et Alimentation">
+                <div class="c-slider__track">
+                    
+                    <article class="c-slider__slide" role="group" aria-roledescription="slide" aria-hidden="false">
+                        <video class="c-slider__video" autoplay loop muted playsinline>
+                            <source src="./assets/videos/rafale.mp4" type="video/mp4">
+                        </video>
+                        <div class="c-slider__content">
+                            <span class="c-slider__tag">La Démesure</span>
+                            <h2 id="sec1-heading" class="c-slider__title">UN BOMBARDIER RAFALE :<br>70 MILLIONS D'EUROS.</h2>
+                            <p class="c-slider__text">Achetés par dizaines avec l'argent de nos impôts au nom de la "croissance" et du "réarmement".</p>
+                        </div>
+                    </article>
+
+                    <article class="c-slider__slide" role="group" aria-roledescription="slide" aria-hidden="true">
+                        <video class="c-slider__video" autoplay loop muted playsinline>
+                            <source src="./assets/videos/baguette.mp4" type="video/mp4">
+                        </video>
+                        <div class="c-slider__content">
+                            <span class="c-slider__tag">La Réalité</span>
+                            <h2 class="c-slider__title">70 MILLIONS D'EUROS =<br>63 MILLIONS DE BAGUETTES.</h2>
+                            <p class="c-slider__text">De quoi nourrir des milliers de citoyens qui sautent des repas. L'ennemi extérieur, ou la faim à nos portes ?</p>
+                        </div>
+                    </article>
+
+                </div>
+                <div class="c-slider__controls">
+                    <button class="c-btn btn-prev" aria-label="Slide précédente">◀ Précédent</button>
+                    <button class="c-btn btn-next" aria-label="Slide suivante">Suivant ▶</button>
+                </div>
+            </div>
+        </section>
+        
+        </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
