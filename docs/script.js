@@ -46,56 +46,41 @@ class AccessibleSlider {
 
 // Initialisation au chargement du DOM
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialiser les sliders
+    // Initialiser les sliders
     document.querySelectorAll('.c-slider').forEach(slider => {
         new AccessibleSlider(slider);
     });
 
-    // 2. Gestion de la Playlist Audio Dynamique (GitHub API)
+    // === GESTION DE LA PLAYLIST AUDIO D'AMBIANCE ===
     const audioToggle = document.getElementById('audio-toggle');
     const bgAudio = document.getElementById('bg-audio');
     
-    let isPlaying = false;
-    let playlist = [];
+    // Ta playlist générée par IA
+    const playlist = [
+        "media/Croissance Nécropole.mp3",
+        "media/Le Code du Soulèvement.mp3",
+        "media/Game Over (La Mise sous Tutelle).mp3",
+        "media/Le Coût de l'Oubli.mp3",
+        "media/Il parle de la guerre.mp3",
+        "media/Le Prix de la Peur.mp3",
+        "media/L'Addition (Le Sang et l'Impôt).mp3",
+        "media/Le Prix de ton Armure.mp3",
+        "media/Le Code de l'Espoir.mp3",
+        "media/Ton Prix, Notre Mort.mp3"
+    ];
+
     let currentTrackIndex = 0;
+    let isPlaying = false;
 
-    // Fonction pour charger la liste des musiques depuis GitHub
-    async function fetchPlaylist() {
-        try {
-            // Requête vers l'API GitHub pour lister le contenu du dossier 'media'
-            const response = await fetch('https://api.github.com/repos/ia-local/urgence-sociale-fr/contents/media');
-            
-            if (response.ok) {
-                const files = await response.json();
-                
-                // On filtre pour ne garder que les fichiers .mp3 et on crée les chemins locaux
-                playlist = files
-                    .filter(file => file.name.endsWith('.mp3'))
-                    .map(file => `./media/${file.name}`);
-
-                console.log("🎵 Playlist chargée :", playlist);
-
-                // On charge le premier morceau dans le lecteur s'il y a des fichiers
-                if (playlist.length > 0) {
-                    bgAudio.src = playlist[0];
-                }
-            }
-        } catch (error) {
-            console.error("Impossible de récupérer la playlist dynamiquement :", error);
-        }
-    }
-
-    // On lance la récupération dès le chargement de la page
-    fetchPlaylist();
-
-    // 3. Gestion du bouton Play/Pause
     if (audioToggle && bgAudio) {
-        audioToggle.addEventListener('click', () => {
-            if (playlist.length === 0) {
-                audioToggle.innerHTML = "⚠️ Chargement des pistes...";
-                return;
-            }
+        // On s'assure de désactiver la boucle sur la balise pour pouvoir passer à la chanson suivante
+        bgAudio.loop = false;
+        
+        // Initialisation de la première piste
+        bgAudio.src = playlist[currentTrackIndex];
 
+        // Gestion du bouton de lecture
+        audioToggle.addEventListener('click', () => {
             if (isPlaying) {
                 bgAudio.pause();
                 audioToggle.innerHTML = "🔇 Activer l'expérience sonore";
@@ -105,21 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             isPlaying = !isPlaying;
         });
-    }
 
-    // 4. Passage automatique au morceau suivant (Boucle de lecture)
-    if (bgAudio) {
+        // Détection automatique de la fin d'une piste pour lire la suivante
         bgAudio.addEventListener('ended', () => {
             currentTrackIndex++;
             
-            // Si on arrive à la fin de la playlist, on recommence au début
+            // Si on a joué toute la playlist, on boucle à la première chanson
             if (currentTrackIndex >= playlist.length) {
                 currentTrackIndex = 0;
             }
             
-            // Charge la nouvelle source et lance la lecture
+            // Chargement de la piste suivante
             bgAudio.src = playlist[currentTrackIndex];
-            bgAudio.play();
+            
+            // On lance la lecture uniquement si le lecteur était déjà activé par l'utilisateur
+            if (isPlaying) {
+                bgAudio.play();
+            }
         });
     }
 });
